@@ -1,26 +1,28 @@
 import re
 
-def add(string_val):
-    num = []
-    neg = []
-    for letter in re.findall(r"-?\d+", string_val):
-        try:
-            if int(letter) > 1000:
-                letter = 0
-            if int(letter) < 0:
-                neg_num.append(letter)
-            num.append(int(letter))
-        except:
-            continue
-    if len(string_val) == 0: 
-        return 0
+def add(num):
+    num_list = []
+    neg_num = []
+
+    if len(num) == 0:
+       return 0
     
     try:
-        int(string_val[-1])
+        int(num[-1])
     except:
         return "Not ok"
        
-    return sum(num)
+    for each_letter in re.findall(r"-?\d+", num):
+        try:
+            if int(each_letter) >= 1000:
+                each_letter = 0
+            if int(each_letter) < 0:
+                neg_num.append(each_letter)
+            num_list.append(int(each_letter))
+        except:
+            continue
+            
+    if len(neg_num) > 0:
+        raise Exception('negatives not allowed: {}'.format(neg_num))
 
-print(add("1"))
-  
+    return sum(num_list)
